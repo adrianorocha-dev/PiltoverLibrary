@@ -129,7 +129,8 @@ border: None;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>PiltoverLibrary/Icon/logo.png</iconset>
+       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
      </property>
      <property name="iconSize">
       <size>

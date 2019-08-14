@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'cadastrar_livro.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -68,6 +70,7 @@ class Ui_Dialog(object):
         self.pushButton_3.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("PiltoverLibrary/Icon/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("Icon/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.pushButton_3.setIcon(icon2)
         self.pushButton_3.setIconSize(QtCore.QSize(128, 128))
         self.pushButton_3.setObjectName("pushButton_3")
@@ -118,14 +121,3 @@ class Ui_Dialog(object):
         self.label_5.setText(_translate("Dialog", "Gênero"))
         self.label_7.setText(_translate("Dialog", "Autor"))
         self.label.setText(_translate("Dialog", "Cadastrar livro"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
-
