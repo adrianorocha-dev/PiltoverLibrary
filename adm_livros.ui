@@ -32,7 +32,8 @@ border: None;
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>PiltoverLibrary/Icon/logo.png</iconset>
+     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+     <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -86,43 +87,54 @@ border: None;
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>PiltoverLibrary/Icon/magnifier.png</normaloff>PiltoverLibrary/Icon/magnifier.png</iconset>
+     <normaloff>PiltoverLibrary/Icon/magnifier.png</normaloff>
+     <normalon>Icon/magnifier.png</normalon>PiltoverLibrary/Icon/magnifier.png</iconset>
    </property>
   </widget>
   <widget class="QTextBrowser" name="textBrowser_info">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>220</x>
      <y>240</y>
-     <width>256</width>
-     <height>192</height>
+     <width>520</width>
+     <height>190</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_atualizar">
+  <widget class="QPushButton" name="pushButton_editar">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>470</y>
+     <x>320</x>
+     <y>460</y>
      <width>80</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>Atualizar</string>
+    <string>Editar</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>Icon/edit-document.png</normalon>
+    </iconset>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_cadastrar">
+  <widget class="QPushButton" name="pushButton_adicionar">
    <property name="geometry">
     <rect>
-     <x>469</x>
-     <y>470</y>
+     <x>530</x>
+     <y>460</y>
      <width>91</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>Cadastrar livro</string>
+    <string>Adicionar</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>Icon/addition-sign.png</normalon>
+    </iconset>
    </property>
   </widget>
  </widget>

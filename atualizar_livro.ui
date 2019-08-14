@@ -23,11 +23,12 @@
     </rect>
    </property>
    <property name="text">
-    <string>Alterar</string>
+    <string>Confirmar</string>
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>PiltoverLibrary/Icon/checked.png</iconset>
+     <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
+     <normalon>Icon/checked.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_ISBN">
@@ -63,7 +64,8 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>PiltoverLibrary/Icon/cancel.png</iconset>
+     <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
+     <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
    </property>
   </widget>
   <widget class="QLabel" name="label_editora">
@@ -150,7 +152,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Atualizar livro</string>
+    <string>Editar livro</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -257,7 +259,8 @@ border: None;
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>PiltoverLibrary/Icon/logo.png</iconset>
+     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+     <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -281,7 +284,7 @@ border: None;
    <property name="icon">
     <iconset>
      <normaloff>PiltoverLibrary/Icon/garbage.png</normaloff>
-     <normalon>PiltoverLibrary/Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
+     <normalon>Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
    </property>
   </widget>
  </widget>
