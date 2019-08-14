@@ -81,7 +81,8 @@ border: None;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>PiltoverLibrary/Icon/logo.png</iconset>
+       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -125,7 +126,8 @@ border: None;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>PiltoverLibrary/Icon/checked.png</iconset>
+       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
+       <normalon>Icon/checked.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
      </property>
     </widget>
    </item>
@@ -168,7 +170,8 @@ border: None;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>PiltoverLibrary/Icon/addition-sign.png</normaloff>PiltoverLibrary/Icon/addition-sign.png</iconset>
+       <normaloff>PiltoverLibrary/Icon/addition-sign.png</normaloff>
+       <normalon>Icon/addition-sign.png</normalon>PiltoverLibrary/Icon/addition-sign.png</iconset>
      </property>
     </widget>
    </item>
