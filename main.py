@@ -35,6 +35,6 @@ if __name__ == "__main__":
 
     window.stackedWidget.insertWidget(0, login)
     window.stackedWidget.insertWidget(1, cadastrarUsuario)
-
+    
     #window.show()
     sys.exit(app.exec_())
