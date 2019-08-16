@@ -3,10 +3,55 @@ from PyQt5 import uic, QtWidgets
 from firebase import auth, db
 from data import User, LevelOfAccess
 
+import requests
+import json
+
+firebase_user = None
+loggedUser = None
+
 class LoginUI(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(LoginUI, self).__init__(parent)
         uic.loadUi('login.ui', self)
+
+        self.mainWindow = mainWindow
+
+        self.pushButton_confirmar.clicked.connect(self.authenticate)
+    
+    def authenticate(self):
+        email = self.lineEdit_login.text()
+        password = self.lineEdit_senha.text()
+
+        try:
+            firebase_user = auth.sign_in_with_email_and_password(email, password)
+        except requests.exceptions.HTTPError as e:
+            error_json = e.args[1]
+            error = json.loads(error_json)['error']
+            if error['message'] == "INVALID_PASSWORD":
+                infoText = "Senha inválida"
+            elif error['message'] == "EMAIL_NOT_FOUND":
+                infoText = "Email não cadastrado"
+            elif error['message'] == "INVALID_EMAIL":
+                infoText = "Email inválido"
+            else:
+                infoText = "Erro no Login"
+            
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Erro")
+            msg.setInformativeText(infoText)
+            msg.setWindowTitle("Erro")
+            msg.exec_()
+
+        if firebase_user:
+            userDict = db.child('users').order_by_child('email').equal_to(email).get().each()
+            loggedUser = User.from_dict(userDict[0].val())
+
+            if loggedUser.level == LevelOfAccess.ADMIN:
+                self.mainWindow.stackedWidget.setCurrentIndex(2)
+            else:
+                self.mainWindow.stackedWidget.setCurrentIndex(3)
+
 
 class CadastrarUsuario(QtWidgets.QDialog):
     def __init__(self, parent=None, mainWindow=None):
@@ -96,10 +141,15 @@ class EditarLivro(QtWidgets.QDialog):
         super(EditarLivro, self).__init__(parent)
         uic.loadUi('atualizar_livro.ui', self)
 
-class menuAdm(QtWidgets.QDialog):
+class MenuAdm(QtWidgets.QDialog):
     def __init__(self, parent=None):
-        super(menuAdm, self).__init__(parent)
+        super(MenuAdm, self).__init__(parent)
         uic.loadUi('menuAdm.ui', self)
+
+class MenuUsuario(QtWidgets.QDialog):
+    def __init__(self, parent=None):
+        super(MenuUsuario, self).__init__(parent)
+        uic.loadUi('menu_usuario.ui', self)
         
 class AdmLivros(QtWidgets.QDialog):
     def __init__(self, parent=None):

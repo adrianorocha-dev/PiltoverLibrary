@@ -39,6 +39,11 @@ class User():
         self.name = name
         self.cpf = cpf
         self.level = level
+    
+    @staticmethod
+    def from_dict(source):
+        user = User(source['email'], source['name'], source['cpf'], level=LevelOfAccess(source['level']))
+        return user
 
     def to_dict(self):
         return {
@@ -47,3 +52,6 @@ class User():
             'cpf': self.cpf,
             'level': self.level.value
         }
+    
+    def __repr__(self):
+        return ('Email={}, Name={}, CPF={}, Level of Access={}'.format(self.email, self.name, self.cpf, self.level))

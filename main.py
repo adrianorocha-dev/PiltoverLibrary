@@ -14,19 +14,22 @@ class UI_Window(QtWidgets.QMainWindow):
         self.show()
 
     def goto_CadastrarLivro(self):
-        self.stackedWidget.setCurrentIndex(7)
+        self.stackedWidget.setCurrentIndex(8)
         
     def goto_edt_livro(self):
-        self.stackedWidget.setCurrentIndex(6)
+        self.stackedWidget.setCurrentIndex(7)
 
     def goto_edt_cadastro(self):
-        self.stackedWidget.setCurrentIndex(5)
+        self.stackedWidget.setCurrentIndex(6)
 
     def goto_adm_livros(self):
-       self.stackedWidget.setCurrentIndex(4)
+       self.stackedWidget.setCurrentIndex(5)
 
     def goto_adm_user (self):
-       self.stackedWidget.setCurrentIndex(3)
+       self.stackedWidget.setCurrentIndex(4)
+    
+    def goto_common_user(self):
+        self.stackedWidget.setCurrentIndex(3)
 
     def goto_Adm(self):
        self.stackedWidget.setCurrentIndex(2)
@@ -46,15 +49,17 @@ if __name__ == "__main__":
     window = UI_Window()
 
 
-    login = LoginUI()
+    login = LoginUI(mainWindow=window)
     login.pushButton_cadastrar.clicked.connect(window.goto_CadastrarUsuario)
 
     cadastrarUsuario = CadastrarUsuario(mainWindow=window)
     cadastrarUsuario.pushButton_cancelar.clicked.connect(window.back_to_Login)
 
-    menuAdm = menuAdm()
+    menuAdm = MenuAdm()
     menuAdm.pushButton_admUsuarios.clicked.connect(window.goto_adm_user)
     menuAdm.pushButton_AdmLivros.clicked.connect(window.goto_adm_livros)
+
+    menuUsuario = MenuUsuario()
     
     adm_usuario = AdmUsuarios()
     adm_usuario.pushButton_Editar.clicked.connect(window.goto_edt_cadastro)
@@ -84,11 +89,12 @@ if __name__ == "__main__":
     window.stackedWidget.insertWidget(0, login)
     window.stackedWidget.insertWidget(1, cadastrarUsuario)
     window.stackedWidget.insertWidget(2, menuAdm)
-    window.stackedWidget.insertWidget(3, adm_usuario)
-    window.stackedWidget.insertWidget(4, AdmLivros)
-    window.stackedWidget.insertWidget(5, EditarCadastro)
-    window.stackedWidget.insertWidget(6, EditarLivro)
-    window.stackedWidget.insertWidget(7, CadastrarLivro)
+    window.stackedWidget.insertWidget(3, menuUsuario)
+    window.stackedWidget.insertWidget(4, adm_usuario)
+    window.stackedWidget.insertWidget(5, AdmLivros)
+    window.stackedWidget.insertWidget(6, EditarCadastro)
+    window.stackedWidget.insertWidget(7, EditarLivro)
+    window.stackedWidget.insertWidget(8, CadastrarLivro)
     
 
     #window.show()
