@@ -144,8 +144,9 @@ class AdmLivros(QtWidgets.QDialog):
         super(AdmLivros, self).__init__(parent)
         uic.loadUi('adm_livros.ui', self)
 
+        self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
-    
+        self.pushButton_buscar
         
         self.titulos = []
 
@@ -156,11 +157,14 @@ class AdmLivros(QtWidgets.QDialog):
             self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
         
     def search_book(self):
+        self.pushButton_editar.setVisible(False)
+        self.textBrowser_info.setText('')
         titulo = self.lineEdit_buscar.text().upper()
         if (titulo in self.titulos):
-             for t in self.books.each():
-                 if (t.val()['title'].upper()==titulo):
-                     self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+            self.pushButton_editar.setVisible(True)
+            for t in self.books.each():
+                if (t.val()['title'].upper()==titulo):
+                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
         else:
             print("nao achei")
 
