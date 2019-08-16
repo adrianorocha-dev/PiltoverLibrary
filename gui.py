@@ -96,6 +96,11 @@ class EditarLivro(QtWidgets.QDialog):
         super(EditarLivro, self).__init__(parent)
         uic.loadUi('atualizar_livro.ui', self)
 
+class menuAdm(QtWidgets.QDialog):
+    def __init__(self, parent=None):
+        super(menuAdm, self).__init__(parent)
+        uic.loadUi('menuAdm.ui', self)
+        
 class AdmLivros(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmLivros, self).__init__(parent)
