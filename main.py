@@ -15,7 +15,6 @@ class UI_Window(QtWidgets.QMainWindow):
 
     def back_to_Login(self):
         self.stackedWidget.setCurrentIndex(0)
-    
 
 if __name__ == "__main__":
     import sys
@@ -28,10 +27,9 @@ if __name__ == "__main__":
 
     login = LoginUI()
     login.pushButton_cadastrar.clicked.connect(window.goto_CadastrarUsuario)
-    
-    cadastrarUsuario = CadastrarUsuario()
+
+    cadastrarUsuario = CadastrarUsuario(mainWindow=window)
     cadastrarUsuario.pushButton_cancelar.clicked.connect(window.back_to_Login)
-    cadastrarUsuario.pushButton_cadastrar.clicked.connect(window.back_to_Login)
 
     window.stackedWidget.insertWidget(0, login)
     window.stackedWidget.insertWidget(1, cadastrarUsuario)
