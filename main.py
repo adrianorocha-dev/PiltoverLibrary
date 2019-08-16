@@ -20,7 +20,7 @@ class UI_Window(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     import sys
 
-    from gui import LoginUI, CadastrarUsuario
+    from gui import *
 
     app = QtWidgets.QApplication(sys.argv)
     window = UI_Window()
@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
     login = LoginUI()
     login.pushButton_cadastrar.clicked.connect(window.goto_CadastrarUsuario)
+    
     cadastrarUsuario = CadastrarUsuario()
     cadastrarUsuario.pushButton_cancelar.clicked.connect(window.back_to_Login)
 
