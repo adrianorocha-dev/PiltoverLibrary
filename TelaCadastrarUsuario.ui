@@ -23,24 +23,7 @@ background:
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="14" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_CPF">
-     <property name="inputMask">
-      <string>99999999999</string>
-     </property>
-    </widget>
-   </item>
-   <item row="15" column="1">
-    <widget class="QLabel" name="label_login">
-     <property name="text">
-      <string>Email:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_nome"/>
-   </item>
-   <item row="13" column="0">
+   <item row="12" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -56,7 +39,7 @@ background:
      </property>
     </spacer>
    </item>
-   <item row="26" column="2">
+   <item row="25" column="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -72,7 +55,7 @@ background:
      </property>
     </spacer>
    </item>
-   <item row="21" column="1">
+   <item row="20" column="1">
     <spacer name="verticalSpacer_3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -88,20 +71,85 @@ background:
      </property>
     </spacer>
    </item>
-   <item row="20" column="1" colspan="2">
+   <item row="6" column="1">
+    <widget class="QLabel" name="label_nome">
+     <property name="text">
+      <string>Nome:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QLabel" name="label_CPF">
+     <property name="text">
+      <string>CPF:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_nome"/>
+   </item>
+   <item row="13" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_CPF">
+     <property name="inputMask">
+      <string>999.999.999-99</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="QLabel" name="label_login">
+     <property name="text">
+      <string>Email:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="1" colspan="2">
     <widget class="QLineEdit" name="lineEdit_ConfirmarSenha">
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </item>
-   <item row="16" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_Email"/>
+   <item row="15" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Login"/>
    </item>
-   <item row="19" column="1">
+   <item row="18" column="1">
     <widget class="QLabel" name="label_confirmarsenha">
      <property name="text">
       <string>Confirme Senha:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="1">
+    <widget class="QLabel" name="label_senha">
+     <property name="text">
+      <string>Senha:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>250</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="24" column="1" colspan="2">
+    <widget class="QPushButton" name="pushButton_cancelar">
+     <property name="text">
+      <string>Cancelar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>Icon/cancel.png</normaloff>Icon/cancel.png</iconset>
      </property>
     </widget>
    </item>
@@ -119,10 +167,10 @@ background:
      </property>
     </widget>
    </item>
-   <item row="24" column="1" colspan="2">
+   <item row="23" column="1" colspan="2">
     <widget class="QPushButton" name="pushButton_cadastrar">
      <property name="text">
-      <string>Salvar</string>
+      <string>Cadastrar</string>
      </property>
      <property name="icon">
       <iconset>
@@ -130,14 +178,14 @@ background:
      </property>
     </widget>
    </item>
-   <item row="7" column="1">
-    <widget class="QLabel" name="label_nome">
-     <property name="text">
-      <string>Nome:</string>
+   <item row="17" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Senha">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </item>
-   <item row="5" column="0" rowspan="3">
+   <item row="5" column="0" rowspan="2">
     <widget class="QPushButton" name="pushButton_logo">
      <property name="styleSheet">
       <string notr="true">QPushButton{
@@ -159,76 +207,12 @@ border: None;
      </property>
     </widget>
    </item>
-   <item row="13" column="1">
-    <widget class="QLabel" name="label_CPF">
-     <property name="text">
-      <string>CPF:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="25" column="1" colspan="2">
-    <widget class="QPushButton" name="pushButton_cancelar">
-     <property name="text">
-      <string>Cancelar</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>Icon/cancel.png</normaloff>Icon/cancel.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="18" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_Senha">
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="3">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>250</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="17" column="1">
-    <widget class="QLabel" name="label_senha">
-     <property name="text">
-      <string>Senha:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>lineEdit_nome</tabstop>
   <tabstop>lineEdit_CPF</tabstop>
-  <tabstop>lineEdit_Email</tabstop>
+  <tabstop>lineEdit_Login</tabstop>
   <tabstop>lineEdit_Senha</tabstop>
   <tabstop>lineEdit_ConfirmarSenha</tabstop>
   <tabstop>pushButton_cadastrar</tabstop>
