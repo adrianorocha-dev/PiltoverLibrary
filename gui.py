@@ -87,7 +87,7 @@ class CadastrarLivro(QtWidgets.QDialog):
         uic.loadUi('cadastrar_livro.ui', self)
 
         self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
-
+       
     def save_to_firebase(self):
 
             
@@ -121,7 +121,9 @@ class CadastrarLivro(QtWidgets.QDialog):
                 msg.setInformativeText("Todos os campos são obrigatorios")
                 msg.setWindowTitle("Failure")
                 msg.exec_()
-            
+    
+   
+        
 class EditarCadastro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarCadastro, self).__init__(parent)
@@ -141,6 +143,28 @@ class AdmLivros(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmLivros, self).__init__(parent)
         uic.loadUi('adm_livros.ui', self)
+
+        self.pushButton_buscar.clicked.connect(self.search_book)
+    
+        
+        self.titulos = []
+
+        self.books = db.child('books').get()
+        for self.book in self.books.each():
+            print(self.book.val()['title'])
+            self.titulos.append(self.book.val()['title'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+        
+    def search_book(self):
+        titulo = self.lineEdit_buscar.text().upper()
+        if (titulo in self.titulos):
+             for t in self.books.each():
+                 if (t.val()['title'].upper()==titulo):
+                     self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+        else:
+            print("nao achei")
+
+
         
 class AdmUsuarios(QtWidgets.QDialog):
     def __init__(self, parent=None):
