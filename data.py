@@ -34,14 +34,16 @@ class LevelOfAccess(Enum):
     ADMIN = 1
 
 class User():
-    def __init__(self, username, email, password, level):
-        self.username = username
+    def __init__(self, email, name, cpf, level=LevelOfAccess.COMMON_USER):
         self.email = email
-        self.password = password
+        self.name = name
+        self.cpf = cpf
         self.level = level
 
     def to_dict(self):
         return {
-            'username': self.username,
-            'level': self.level,
+            'email': self.email,
+            'name': self.name,
+            'cpf': self.cpf,
+            'level': self.level.value
         }

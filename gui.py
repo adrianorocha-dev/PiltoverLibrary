@@ -1,5 +1,8 @@
 from PyQt5 import uic, QtWidgets
 
+from firebase import auth, db
+from data import User, LevelOfAccess
+
 class LoginUI(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(LoginUI, self).__init__(parent)
@@ -9,6 +12,38 @@ class CadastrarUsuario(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(CadastrarUsuario, self).__init__(parent)
         uic.loadUi('TelaCadastrarUsuario.ui', self)
+
+        self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
+
+    def save_to_firebase(self):
+
+        password = self.lineEdit_Senha.text()
+        confimPassword = self.lineEdit_ConfirmarSenha.text()
+
+        if password == confimPassword:
+            email = self.lineEdit_Login.text()
+            name = self.lineEdit_nome.text()
+            cpf = self.lineEdit_CPF.text()
+
+            #Remove dots and dashes from CPF
+            from re import sub as re_sub
+            cpf = re_sub('[.-]', '', cpf)
+
+            user = User(email, name, cpf, LevelOfAccess.COMMON_USER)
+
+            auth.create_user_with_email_and_password(email, password)
+            db.child('users').push(user.to_dict())
+
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+            msg.setText("Sucesso")
+            msg.setInformativeText("Cadastrado com sucesso!")
+            msg.setWindowTitle("Sucesso")
+            msg.exec_()
+        else:
+            print("Erro")
+        
+
 
 class CadastrarLivro(QtWidgets.QDialog):
     def __init__(self, parent=None):
