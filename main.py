@@ -68,10 +68,21 @@ if __name__ == "__main__":
     AdmLivros.pushButton_adicionar.clicked.connect(window.goto_CadastrarLivro)
 
     CadastrarLivro = CadastrarLivro()
-
+    
+    CadastrarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
+    CadastrarLivro.pushButton_cadastrar.clicked.connect(window.goto_Adm)
+    
     EditarCadastro = EditarCadastro()
+    EditarCadastro.pushButton_cancelar.clicked.connect(window.goto_Adm)
+    EditarCadastro.pushButton_alterar.clicked.connect(window.goto_Adm)
+    EditarCadastro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
     EditarLivro = EditarLivro()
+    EditarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
+    EditarLivro.pushButton_alterar.clicked.connect(window.goto_Adm)
+    EditarLivro.pushButton_Excluir.clicked.connect(window.goto_Adm)
+
+
 
     window.stackedWidget.insertWidget(0, login)
     window.stackedWidget.insertWidget(1, cadastrarUsuario)
