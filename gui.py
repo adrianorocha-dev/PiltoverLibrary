@@ -1,7 +1,7 @@
 from PyQt5 import uic, QtWidgets
 
 from firebase import auth, db
-from data import User, LevelOfAccess
+from data import User, LevelOfAccess, Book
 
 import requests
 import json
@@ -131,6 +131,44 @@ class CadastrarLivro(QtWidgets.QDialog):
         super(CadastrarLivro, self).__init__(parent)
         uic.loadUi('cadastrar_livro.ui', self)
 
+        self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
+       
+    def save_to_firebase(self):
+
+            
+            titulo = self.lineEdit_titulo.text()
+            numerodepaginas = self.lineEdit_numerodepaginas.text()
+            isbn = self.lineEdit_ISBN.text()
+            ano = self.lineEdit_ano.text()
+            genero = self.lineEdit_Genero.text()
+            descricao = self.lineEdit_descricao.text()
+            autor = self.lineEdit_autor.text()
+
+            if not(titulo == '' or numerodepaginas == '' or isbn == '' or  genero == '' or descricao == '' or autor == ''):
+
+
+            #Remove dots and dashes from CPF
+    
+                book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
+
+                db.child('books').push(book.to_dict())
+
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+                msg.setText("Sucesso")
+                msg.setInformativeText("Cadastrado com sucesso!")
+                msg.setWindowTitle("Sucesso")
+                msg.exec_()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+                msg.setText("Failure")
+                msg.setInformativeText("Todos os campos são obrigatorios")
+                msg.setWindowTitle("Failure")
+                msg.exec_()
+    
+   
+        
 class EditarCadastro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarCadastro, self).__init__(parent)
@@ -155,8 +193,54 @@ class AdmLivros(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmLivros, self).__init__(parent)
         uic.loadUi('adm_livros.ui', self)
+
+        self.pushButton_editar.setVisible(False)
+        self.pushButton_buscar.clicked.connect(self.search_book)
+        self.pushButton_buscar
+        
+        self.titulos = []
+
+        self.books = db.child('books').get()
+        for self.book in self.books.each():
+            print(self.book.val()['title'])
+            self.titulos.append(self.book.val()['title'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+        
+    def search_book(self):
+        self.pushButton_editar.setVisible(False)
+        self.textBrowser_info.setText('')
+        titulo = self.lineEdit_buscar.text().upper()
+        if (titulo in self.titulos):
+            self.pushButton_editar.setVisible(True)
+            for t in self.books.each():
+                if (t.val()['title'].upper()==titulo):
+                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+        else:
+            print("nao achei")
+
+
         
 class AdmUsuarios(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmUsuarios, self).__init__(parent)
         uic.loadUi('adm_usuarios.ui', self)
+
+        self.pushButton_buscar.clicked.connect(self.search_user)
+    
+        
+        self.userslist = []
+
+        self.users = db.child('users').get()
+        for self.user in self.users.each():
+            print(self.user.val()['name'])
+            self.userslist.append(self.user.val()['name'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.user.val()['name'] + " : " + self.user.val()['cpf']+ "\n")
+        
+    def search_user(self):
+        usuario = self.lineEdit_buscar.text().upper()
+        if (usuario in self.userslist):
+             for u in self.users.each():
+                 if (u.val()['name'].upper()==usuario):
+                     self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
+        else:
+            print("nao achei")
