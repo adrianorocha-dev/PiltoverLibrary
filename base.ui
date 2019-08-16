@@ -41,6 +41,9 @@
     <addaction name="actionLogin"/>
     <addaction name="actionCadastrar_Livro"/>
     <addaction name="actionCadastrar_Usuario"/>
+    <addaction name="actionMenu_Adm"/>
+    <addaction name="actionAdm_Usu_rio"/>
+    <addaction name="actionadm_Livros"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -57,6 +60,21 @@
   <action name="actionCadastrar_Usuario">
    <property name="text">
     <string>Cadastrar Usuario</string>
+   </property>
+  </action>
+  <action name="actionMenu_Adm">
+   <property name="text">
+    <string>Menu Adm</string>
+   </property>
+  </action>
+  <action name="actionAdm_Usu_rio">
+   <property name="text">
+    <string>Adm Usuário</string>
+   </property>
+  </action>
+  <action name="actionadm_Livros">
+   <property name="text">
+    <string>adm Livros</string>
    </property>
   </action>
  </widget>
