@@ -30,6 +30,7 @@ if __name__ == "__main__":
     login.pushButton_cadastrar.clicked.connect(window.goto_CadastrarUsuario)
     cadastrarUsuario = CadastrarUsuario()
     cadastrarUsuario.pushButton_cancelar.clicked.connect(window.back_to_Login)
+    cadastrarUsuario.pushButton_cadastrar.clicked.connect(window.back_to_Login)
 
     window.stackedWidget.insertWidget(0, login)
     window.stackedWidget.insertWidget(1, cadastrarUsuario)
