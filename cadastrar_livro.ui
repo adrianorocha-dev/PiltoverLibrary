@@ -17,20 +17,6 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="16" column="2">
-    <widget class="QLineEdit" name="lineEdit_autor"/>
-   </item>
-   <item row="18" column="2">
-    <widget class="QPushButton" name="pushButton_cadastrar">
-     <property name="text">
-      <string>Cadastrar-se</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>PiltoverLibrary/Icon/checked.png</iconset>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="0">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
@@ -43,6 +29,21 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="16" column="2">
+    <widget class="QLineEdit" name="lineEdit_autor"/>
+   </item>
+   <item row="18" column="2">
+    <widget class="QPushButton" name="pushButton_cadastrar">
+     <property name="text">
+      <string>Cadastrar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
+       <normalon>Icon/checked.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
+     </property>
+    </widget>
    </item>
    <item row="9" column="2">
     <widget class="QLabel" name="label_4">
@@ -80,17 +81,8 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>PiltoverLibrary/Icon/cancel.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="14" column="2">
-    <widget class="QLineEdit" name="lineEdit_descricao"/>
-   </item>
-   <item row="5" column="2">
-    <widget class="QLabel" name="label_editora">
-     <property name="text">
-      <string>Editora</string>
+       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
+       <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
      </property>
     </widget>
    </item>
@@ -100,6 +92,9 @@
       <string>ISBN</string>
      </property>
     </widget>
+   </item>
+   <item row="14" column="2">
+    <widget class="QLineEdit" name="lineEdit_descricao"/>
    </item>
    <item row="17" column="2">
     <spacer name="verticalSpacer_2">
@@ -116,6 +111,13 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="5" column="2">
+    <widget class="QLabel" name="label_editora">
+     <property name="text">
+      <string>Nº de páginas</string>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0" rowspan="5">
     <widget class="QPushButton" name="pushButton_3">
@@ -143,23 +145,6 @@ border: None;
    <item row="4" column="2">
     <widget class="QLineEdit" name="lineEdit_titulo"/>
    </item>
-   <item row="13" column="2">
-    <widget class="QLabel" name="label_6">
-     <property name="text">
-      <string>Descrição</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2">
-    <widget class="QLineEdit" name="lineEdit_editora"/>
-   </item>
-   <item row="11" column="2">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Gênero</string>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="3">
     <spacer name="horizontalSpacer">
      <property name="orientation">
@@ -173,6 +158,13 @@ border: None;
      </property>
     </spacer>
    </item>
+   <item row="11" column="2">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Gênero</string>
+     </property>
+    </widget>
+   </item>
    <item row="12" column="2">
     <widget class="QLineEdit" name="lineEdit_Genero"/>
    </item>
@@ -182,6 +174,16 @@ border: None;
       <string>Autor</string>
      </property>
     </widget>
+   </item>
+   <item row="13" column="2">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Descrição</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QLineEdit" name="lineEdit_numerodepaginas"/>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label">
@@ -195,6 +197,9 @@ border: None;
      </property>
      <property name="text">
       <string>Cadastrar livro</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>

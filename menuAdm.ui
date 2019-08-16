@@ -13,101 +13,114 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton_AdmLivros">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>250</y>
-     <width>251</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Administrar livors</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
-     <normalon>Icon/books-stack-of-three.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_admUsuarios">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>300</y>
-     <width>251</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="text">
-    <string>Administrar Usuários</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
-     <normalon>Icon/multiple-users-silhouette.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>90</y>
-     <width>331</width>
-     <height>38</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>DejaVu Sans</family>
-     <pointsize>24</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Menu Administrador </string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Logo">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>290</width>
-     <height>128</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_Logo">
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
 border: None;
 }</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
-     <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>128</width>
-     <height>128</height>
-    </size>
-   </property>
-  </widget>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>128</width>
+       <height>128</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Menu Administrador </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_admUsuarios">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Administrar Usuários</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
+       <normalon>Icon/multiple-users-silhouette.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_AdmLivros">
+     <property name="text">
+      <string>Administrar livors</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
+       <normalon>Icon/books-stack-of-three.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>80</width>
+       <height>100</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
