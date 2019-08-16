@@ -1,7 +1,7 @@
 from PyQt5 import uic, QtWidgets
 
 from firebase import auth, db
-from data import User, LevelOfAccess
+from data import User, LevelOfAccess, Book
 
 class LoginUI(QtWidgets.QDialog):
     def __init__(self, parent=None):
@@ -50,6 +50,42 @@ class CadastrarLivro(QtWidgets.QDialog):
         super(CadastrarLivro, self).__init__(parent)
         uic.loadUi('cadastrar_livro.ui', self)
 
+        self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
+
+    def save_to_firebase(self):
+
+            
+            titulo = self.lineEdit_titulo.text()
+            numerodepaginas = self.lineEdit_numerodepaginas.text()
+            isbn = self.lineEdit_ISBN.text()
+            ano = self.lineEdit_ano.text()
+            genero = self.lineEdit_Genero.text()
+            descricao = self.lineEdit_descricao.text()
+            autor = self.lineEdit_autor.text()
+
+            if not(titulo == '' or numerodepaginas == '' or isbn == '' or  genero == '' or descricao == '' or autor == ''):
+
+
+            #Remove dots and dashes from CPF
+    
+                book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
+
+                db.child('books').push(book.to_dict())
+
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+                msg.setText("Sucesso")
+                msg.setInformativeText("Cadastrado com sucesso!")
+                msg.setWindowTitle("Sucesso")
+                msg.exec_()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+                msg.setText("Failure")
+                msg.setInformativeText("Todos os campos são obrigatorios")
+                msg.setWindowTitle("Failure")
+                msg.exec_()
+            
 class EditarCadastro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarCadastro, self).__init__(parent)
