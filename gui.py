@@ -170,3 +170,23 @@ class AdmUsuarios(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmUsuarios, self).__init__(parent)
         uic.loadUi('adm_usuarios.ui', self)
+
+        self.pushButton_buscar.clicked.connect(self.search_user)
+    
+        
+        self.userslist = []
+
+        self.users = db.child('users').get()
+        for self.user in self.users.each():
+            print(self.user.val()['name'])
+            self.userslist.append(self.user.val()['name'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.user.val()['name'] + " : " + self.user.val()['cpf']+ "\n")
+        
+    def search_user(self):
+        usuario = self.lineEdit_buscar.text().upper()
+        if (usuario in self.userslist):
+             for u in self.users.each():
+                 if (u.val()['name'].upper()==usuario):
+                     self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
+        else:
+            print("nao achei")
