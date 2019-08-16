@@ -95,7 +95,7 @@ border: None;
    <item row="1" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Login</string>
+      <string>Email</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

@@ -13,211 +13,198 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton_alterar">
-   <property name="geometry">
-    <rect>
-     <x>334</x>
-     <y>396</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Confirmar</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
-     <normalon>Icon/checked.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_Login">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>277</y>
-     <width>290</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_cancelar">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="geometry">
-    <rect>
-     <x>434</x>
-     <y>396</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="text">
-    <string>Cancelar</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
-     <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_editora">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>200</y>
-     <width>290</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>CPF</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_Senha">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>334</y>
-     <width>290</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_Nome">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>169</y>
-     <width>290</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_CPF">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>223</y>
-     <width>290</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>90</y>
-     <width>290</width>
-     <height>38</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>DejaVu Sans</family>
-     <pointsize>24</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Editar Cadastro</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>254</y>
-     <width>290</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Login</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_titulo">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>146</y>
-     <width>290</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Nome</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>308</y>
-     <width>290</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Senha</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Logo">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>40</y>
-     <width>290</width>
-     <height>128</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="12" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QPushButton" name="pushButton_Logo">
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
 border: None;
 }</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
-     <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>128</width>
-     <height>128</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Excluir">
-   <property name="geometry">
-    <rect>
-     <x>544</x>
-     <y>396</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Excluir</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>PiltoverLibrary/Icon/garbage.png</normaloff>
-     <normalon>Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
-   </property>
-  </widget>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>128</width>
+       <height>128</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QLabel" name="label_titulo">
+     <property name="text">
+      <string>Nome</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QLabel" name="label_editora">
+     <property name="text">
+      <string>CPF</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="3">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Email</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="3">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Senha</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="2">
+    <widget class="QPushButton" name="pushButton_cancelar">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Cancelar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
+       <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_CPF"/>
+   </item>
+   <item row="9" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Senha"/>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Nome"/>
+   </item>
+   <item row="7" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Email"/>
+   </item>
+   <item row="5" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="11" column="1">
+    <widget class="QPushButton" name="pushButton_Excluir">
+     <property name="text">
+      <string>Excluir</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/garbage.png</normaloff>
+       <normalon>Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1" colspan="2">
+    <widget class="QPushButton" name="pushButton_alterar">
+     <property name="text">
+      <string>Confirmar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/checked.png</normaloff>
+       <normalon>Icon/checked.png</normalon>PiltoverLibrary/Icon/checked.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Editar Cadastro</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
