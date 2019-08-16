@@ -9,19 +9,51 @@ class LoginUI(QtWidgets.QDialog):
         uic.loadUi('login.ui', self)
 
 class CadastrarUsuario(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(CadastrarUsuario, self).__init__(parent)
         uic.loadUi('TelaCadastrarUsuario.ui', self)
 
+        self.mainWindow = mainWindow
+
         self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
 
+    def validate(self):
+        import re
+        nameVal = self.lineEdit_nome.text() != ""
+        cpfVal = re.match("[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}", self.lineEdit_CPF.text()) != None
+        emailVal = re.match(".*@.*\..*", self.lineEdit_Login.text()) != None
+        pwdVal = (self.lineEdit_Senha.text()) == (self.lineEdit_ConfirmarSenha.text())
+        
+        print("Validando...")
+
+        if not (nameVal and cpfVal and emailVal and pwdVal):
+            if not nameVal:
+                infoText = "Erro! Preencha o campo nome."
+            elif not cpfVal:
+                infoText = "Erro! CPF inválido."
+            elif not emailVal:
+                infoText = "Erro! Email inválido."
+            else:
+                infoText = "Erro! A senha e a confirmação estão diferentes."
+            
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Erro")
+            msg.setInformativeText(infoText)
+            msg.setWindowTitle("Erro")
+            msg.exec_()
+
+            return False
+        else:
+            print("validado")
+            return True
+
     def save_to_firebase(self):
-
-        password = self.lineEdit_Senha.text()
-        confimPassword = self.lineEdit_ConfirmarSenha.text()
-
-        if password == confimPassword:
+        validation = self.validate()
+        if validation:
+            print("validation success")
             email = self.lineEdit_Login.text()
+            password = self.lineEdit_Senha.text()
             name = self.lineEdit_nome.text()
             cpf = self.lineEdit_CPF.text()
 
@@ -40,8 +72,12 @@ class CadastrarUsuario(QtWidgets.QDialog):
             msg.setInformativeText("Cadastrado com sucesso!")
             msg.setWindowTitle("Sucesso")
             msg.exec_()
+
+            if self.mainWindow:
+                #self.mainWindow.back_to_login()
+                self.mainWindow.stackedWidget.setCurrentIndex(0)
         else:
-            print("Erro")
+            print("validation error")
         
 
 
