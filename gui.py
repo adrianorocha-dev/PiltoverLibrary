@@ -188,7 +188,31 @@ class MenuUsuario(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(MenuUsuario, self).__init__(parent)
         uic.loadUi('menu_usuario.ui', self)
+
+        self.pushButton_buscar.clicked.connect(self.search_book)
+        self.list_books()
+
+    def list_books(self):
         
+        self.titulos = []
+
+        self.books = db.child('books').get()
+        for self.book in self.books.each():
+            print(self.book.val()['title'])
+            self.titulos.append(self.book.val()['title'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+        
+    def search_book(self):
+        self.textBrowser_info.setText('')
+        titulo = self.lineEdit_buscar.text().upper()
+        if (titulo in self.titulos):
+            for t in self.books.each():
+                if (t.val()['title'].upper()==titulo):
+                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+        else:
+            print("nao achei")
+            self.list_books()
+
 class AdmLivros(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(AdmLivros, self).__init__(parent)
@@ -196,7 +220,9 @@ class AdmLivros(QtWidgets.QDialog):
 
         self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
-        self.pushButton_buscar
+        self.list_books()
+
+    def list_books(self):
         
         self.titulos = []
 
@@ -217,6 +243,7 @@ class AdmLivros(QtWidgets.QDialog):
                     self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
         else:
             print("nao achei")
+            self.list_books()
 
 
         
@@ -225,8 +252,11 @@ class AdmUsuarios(QtWidgets.QDialog):
         super(AdmUsuarios, self).__init__(parent)
         uic.loadUi('adm_usuarios.ui', self)
 
+        self.pushButton_Editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_user)
+        self.list_users() 
     
+    def list_users(self):
         
         self.userslist = []
 
@@ -237,10 +267,14 @@ class AdmUsuarios(QtWidgets.QDialog):
             self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.user.val()['name'] + " : " + self.user.val()['cpf']+ "\n")
         
     def search_user(self):
+        self.pushButton_Editar.setVisible(False)
+        self.textBrowser_info.setText('')
         usuario = self.lineEdit_buscar.text().upper()
         if (usuario in self.userslist):
+             self.pushButton_Editar.setVisible(True)
              for u in self.users.each():
                  if (u.val()['name'].upper()==usuario):
                      self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
         else:
             print("nao achei")
+            self.list_users()
