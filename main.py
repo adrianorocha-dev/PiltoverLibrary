@@ -62,8 +62,7 @@ if __name__ == "__main__":
 
     menuUsuario = MenuUsuario()
     
-    adm_usuario = AdmUsuarios()
-    adm_usuario.pushButton_Editar.clicked.connect(window.goto_edt_cadastro)
+    adm_usuario = AdmUsuarios(mainWindow=window)
     adm_usuario.pushButton_adicionar.clicked.connect(window.goto_CadastrarUsuario)
     adm_usuario.pushButton_cancelar.clicked.connect(window.goto_Adm)
 

@@ -22,7 +22,8 @@ class LoginUI(QtWidgets.QDialog):
         email = self.lineEdit_login.text()
         password = self.lineEdit_senha.text()
 
-        firebase_user = None
+        global firebase_user
+        global loggedUser
 
         try:
             firebase_user = auth.sign_in_with_email_and_password(email, password)
@@ -120,9 +121,13 @@ class CadastrarUsuario(QtWidgets.QDialog):
             msg.setWindowTitle("Sucesso")
             msg.exec_()
 
+            global loggedUser
+
             if self.mainWindow:
-                #self.mainWindow.back_to_login()
-                self.mainWindow.stackedWidget.setCurrentIndex(0)
+                if loggedUser != None and loggedUser.level == LevelOfAccess.ADMIN:
+                    self.mainWindow.stackedWidget.setCurrentIndex(4)
+                else:
+                    self.mainWindow.stackedWidget.setCurrentIndex(0)
         else:
             print("validation error")
         
@@ -175,6 +180,11 @@ class EditarCadastro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarCadastro, self).__init__(parent)
         uic.loadUi('Editar_cadastro.ui', self)
+    
+    def setValues(self, user):
+        self.lineEdit_Nome.setText(user.name)
+        self.lineEdit_CPF.setText(user.cpf)
+        self.lineEdit_Email.setText(user.email)
 
 
 
@@ -245,10 +255,10 @@ class AdmLivros(QtWidgets.QDialog):
         self.titulos = []
 
         self.books = db.child('books').get()
-        for self.book in self.books.each():
-            print(self.book.val()['title'])
-            self.titulos.append(self.book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+        for book in self.books.each():
+            print(book.val()['title'])
+            self.titulos.append(book.val()['title'].upper())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + ":" + book.val()['author']+ "\n")
         
     def search_book(self):
         self.pushButton_editar.setVisible(False)
@@ -270,13 +280,17 @@ class AdmLivros(QtWidgets.QDialog):
 
         
 class AdmUsuarios(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(AdmUsuarios, self).__init__(parent)
         uic.loadUi('adm_usuarios.ui', self)
 
+        self.mainWindow = mainWindow
+
         self.pushButton_Editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_user)
-        self.list_users() 
+        self.list_users()
+
+        self.pushButton_Editar.clicked.connect(self.edit_user)
     
     def list_users(self):
         
@@ -297,6 +311,11 @@ class AdmUsuarios(QtWidgets.QDialog):
              for u in self.users.each():
                  if (u.val()['name'].upper()==usuario):
                      self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
+                     self.user_to_edit = User.from_dict(u.val())
         else:
             print("nao achei")
             self.list_users()
+
+    def edit_user(self):
+        self.mainWindow.stackedWidget.setCurrentIndex(6)
+        self.mainWindow.stackedWidget.widget(6).setValues(self.user_to_edit)
