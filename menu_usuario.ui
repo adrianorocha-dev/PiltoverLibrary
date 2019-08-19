@@ -113,7 +113,7 @@ border: None;
       </font>
      </property>
      <property name="text">
-      <string>PitoverLibrary</string>
+      <string>PiltoverLibrary</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
