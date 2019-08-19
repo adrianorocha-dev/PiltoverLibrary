@@ -176,11 +176,23 @@ class EditarCadastro(QtWidgets.QDialog):
         super(EditarCadastro, self).__init__(parent)
         uic.loadUi('Editar_cadastro.ui', self)
 
+
+
 class EditarLivro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarLivro, self).__init__(parent)
         uic.loadUi('atualizar_livro.ui', self)
+    
+    def setValues(self, livro):
+        self.lineEdit_titulo.setText(livro.title)
+        self.lineEdit_numerodepaginas.setText(livro.publisher)
+        self.lineEdit_ISBN.setText(livro.isbn)
+        self.lineEdit_ano.setText(livro.year)
+        self.lineEdit_Genero.setText(livro.genre)
+        self.lineEdit_descricao.setText(livro.description)
+        self.lineEdit_autor.setText(livro.author)
 
+        
 class MenuAdm(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(MenuAdm, self).__init__(parent)
@@ -214,14 +226,18 @@ class MenuUsuario(QtWidgets.QDialog):
         else:
             print("nao achei")
             self.list_books()
+            
 
 class AdmLivros(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(AdmLivros, self).__init__(parent)
         uic.loadUi('adm_livros.ui', self)
 
+        self.mainWindow = mainWindow
+
         self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
+        self.pushButton_editar.clicked.connect(self.edit_book)
         self.list_books()
 
     def list_books(self):
@@ -243,10 +259,14 @@ class AdmLivros(QtWidgets.QDialog):
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
                     self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+                    self.livro = Book.from_dict(t.val())
         else:
             print("nao achei")
             self.list_books()
 
+    def edit_book(self):
+        self.mainWindow.stackedWidget.setCurrentIndex(7)
+        self.mainWindow.stackedWidget.widget(7).setValues(self.livro)
 
         
 class AdmUsuarios(QtWidgets.QDialog):

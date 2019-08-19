@@ -67,8 +67,7 @@ if __name__ == "__main__":
     adm_usuario.pushButton_adicionar.clicked.connect(window.goto_CadastrarUsuario)
     adm_usuario.pushButton_cancelar.clicked.connect(window.goto_Adm)
 
-    AdmLivros = AdmLivros()
-    AdmLivros.pushButton_editar.clicked.connect(window.goto_edt_livro)
+    AdmLivros = AdmLivros(mainWindow=window)
     AdmLivros.pushButton_adicionar.clicked.connect(window.goto_CadastrarLivro)
     AdmLivros.pushButton_cancelar.clicked.connect(window.goto_Adm)
 
