@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     EditarLivro = EditarLivro()
     EditarLivro.pushButton_cancelar.clicked.connect(window.goto_adm_livros)
-    EditarLivro.pushButton_alterar.clicked.connect(window.goto_Adm)
+    EditarLivro.pushButton_confirmar.clicked.connect(window.goto_Adm)
     EditarLivro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
 

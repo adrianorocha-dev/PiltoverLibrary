@@ -192,7 +192,9 @@ class EditarLivro(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(EditarLivro, self).__init__(parent)
         uic.loadUi('atualizar_livro.ui', self)
-    
+
+        self.pushButton_confirmar.clicked.connect(self.setValuesInFirebase)
+
     def setValues(self, livro):
         self.lineEdit_titulo.setText(livro.title)
         self.lineEdit_numerodepaginas.setText(livro.publisher)
@@ -202,7 +204,39 @@ class EditarLivro(QtWidgets.QDialog):
         self.lineEdit_descricao.setText(livro.description)
         self.lineEdit_autor.setText(livro.author)
 
-        
+    def setValuesInFirebase (self):
+
+        titulo = self.lineEdit_titulo.text()
+        numerodepaginas = self.lineEdit_numerodepaginas.text()
+        isbn = self.lineEdit_ISBN.text()
+        ano = self.lineEdit_ano.text()
+        genero = self.lineEdit_Genero.text()
+        descricao = self.lineEdit_descricao.text()
+        autor = self.lineEdit_autor.text()
+
+        if not(titulo == '' or numerodepaginas == '' or isbn == '' or  genero == '' or descricao == '' or autor == ''):    
+    
+            book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
+            db.child('books').push(book.to_dict())
+
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+            msg.setText("Sucesso")
+            msg.setInformativeText("Cadastrado com sucesso!")
+            msg.setWindowTitle("Sucesso")
+            msg.exec_()
+        else:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+            msg.setText("Failure")
+            msg.setInformativeText("Todos os campos são obrigatorios")
+            msg.setWindowTitle("Failure")
+            msg.exec_()
+    
+               
+
+
+
 class MenuAdm(QtWidgets.QDialog):
     def __init__(self, parent=None):
         super(MenuAdm, self).__init__(parent)

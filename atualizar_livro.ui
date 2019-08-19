@@ -173,7 +173,7 @@ border: None;
     <widget class="QLineEdit" name="lineEdit_titulo"/>
    </item>
    <item row="15" column="1" colspan="2">
-    <widget class="QPushButton" name="pushButton_alterar">
+    <widget class="QPushButton" name="pushButton_confirmar">
      <property name="text">
       <string>Confirmar</string>
      </property>
