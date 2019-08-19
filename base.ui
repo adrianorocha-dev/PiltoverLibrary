@@ -44,6 +44,7 @@
     <addaction name="actionMenu_Adm"/>
     <addaction name="actionAdm_Usu_rio"/>
     <addaction name="actionadm_Livros"/>
+    <addaction name="actionMenu_usuario"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -75,6 +76,11 @@
   <action name="actionadm_Livros">
    <property name="text">
     <string>adm Livros</string>
+   </property>
+  </action>
+  <action name="actionMenu_usuario">
+   <property name="text">
+    <string>Menu usuario</string>
    </property>
   </action>
  </widget>

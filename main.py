@@ -9,6 +9,7 @@ class UI_Window(QtWidgets.QMainWindow):
         self.actionCadastrar_Usuario.triggered.connect(self.goto_CadastrarUsuario)
         self.actionMenu_Adm.triggered.connect(self.goto_Adm)
         self.actionAdm_Usu_rio.triggered.connect(self.goto_adm_user)
+        self.actionMenu_usuario.triggered.connect(self.goto_common_user)
 
 
         self.show()
@@ -80,7 +81,7 @@ if __name__ == "__main__":
     EditarCadastro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
     EditarLivro = EditarLivro()
-    EditarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
+    EditarLivro.pushButton_cancelar.clicked.connect(window.goto_adm_livros)
     EditarLivro.pushButton_alterar.clicked.connect(window.goto_Adm)
     EditarLivro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
@@ -95,6 +96,7 @@ if __name__ == "__main__":
     window.stackedWidget.insertWidget(6, EditarCadastro)
     window.stackedWidget.insertWidget(7, EditarLivro)
     window.stackedWidget.insertWidget(8, CadastrarLivro)
+
     
 
     #window.show()
