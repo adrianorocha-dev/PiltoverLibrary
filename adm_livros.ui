@@ -14,65 +14,21 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="5" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1">
-    <widget class="QTextBrowser" name="textBrowser_info"/>
-   </item>
-   <item row="2" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="lineEdit_buscar"/>
-   </item>
-   <item row="3" column="1">
-    <widget class="QPushButton" name="pushButton_editar">
      <property name="text">
-      <string>Editar</string>
+      <string>Administrar livros</string>
      </property>
-     <property name="icon">
-      <iconset>
-       <normalon>Icon/edit-document.png</normalon>
-      </iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="pushButton_buscar">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>PiltoverLibrary/Icon/magnifier.png</normaloff>
-       <normalon>Icon/magnifier.png</normalon>PiltoverLibrary/Icon/magnifier.png</iconset>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
@@ -99,6 +55,18 @@ border: None;
      </property>
     </widget>
    </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pushButton_buscar">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/magnifier.png</normaloff>
+       <normalon>Icon/magnifier.png</normalon>PiltoverLibrary/Icon/magnifier.png</iconset>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
@@ -115,7 +83,38 @@ border: None;
      </property>
     </spacer>
    </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="lineEdit_buscar"/>
+   </item>
    <item row="4" column="1">
+    <widget class="QPushButton" name="pushButton_editar">
+     <property name="text">
+      <string>Editar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normalon>Icon/edit-document.png</normalon>
+      </iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="1">
     <widget class="QPushButton" name="pushButton_adicionar">
      <property name="text">
       <string>Adicionar</string>
@@ -127,21 +126,34 @@ border: None;
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-       <pointsize>24</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+   <item row="2" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1">
+    <widget class="QTextBrowser" name="textBrowser_info"/>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="pushButton_cancelar">
      <property name="text">
-      <string>Administrar livros</string>
+      <string>Cancelar</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="icon">
+      <iconset>
+       <disabledon>Icon/cancel.png</disabledon>
+      </iconset>
      </property>
     </widget>
    </item>
