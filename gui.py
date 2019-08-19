@@ -22,6 +22,8 @@ class LoginUI(QtWidgets.QDialog):
         email = self.lineEdit_login.text()
         password = self.lineEdit_senha.text()
 
+        firebase_user = None
+
         try:
             firebase_user = auth.sign_in_with_email_and_password(email, password)
         except requests.exceptions.HTTPError as e:
