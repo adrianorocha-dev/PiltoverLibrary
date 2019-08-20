@@ -290,6 +290,8 @@ class EditarLivro(QtWidgets.QDialog):
         uic.loadUi('atualizar_livro.ui', self)
 
         self.mainWindow = mainWindow
+        
+        self.editing_book = None
 
         self.pushButton_confirmar.clicked.connect(self.setValuesInFirebase)
         self.pushButton_Excluir.clicked.connect(self.deletelivro)
@@ -300,6 +302,7 @@ class EditarLivro(QtWidgets.QDialog):
 
 
     def setValues(self, livro):
+        self.editing_book = livro
         self.lineEdit_titulo.setText(livro.title)
         self.lineEdit_numerodepaginas.setText(livro.pages)
         self.lineEdit_ano.setText(livro.year)
@@ -348,17 +351,16 @@ class EditarLivro(QtWidgets.QDialog):
         if validation:
             titulo = self.lineEdit_titulo.text()
             numerodepaginas = self.lineEdit_numerodepaginas.text()
-            isbn = self.lineEdit_ISBN.text()
             ano = self.lineEdit_ano.text()
             genero = self.lineEdit_Genero.text()
             descricao = self.lineEdit_descricao.text()
             autor = self.lineEdit_autor.text()
     
-            book_update = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
+            book_update = {'title': titulo, 'pages': numerodepaginas, 'genre': genero, 'description': descricao, 'year': ano, 'author': autor}
 
-            book = db.child('books').order_by_child("isbn").equal_to(book_update.isbn).get().each()
+            book = db.child('books').order_by_child("isbn").equal_to(self.editing_book.isbn).get().each()
 
-            db.child('books').child(book[0].key()).update(book_update.to_dict())
+            db.child('books').child(book[0].key()).update(book_update)
 
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.NoIcon)
