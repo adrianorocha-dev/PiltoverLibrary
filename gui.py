@@ -405,7 +405,7 @@ class MenuUsuario(QtWidgets.QDialog):
         for self.book in self.books.each():
             print(self.book.val()['title'])
             self.titulos.append(self.book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + " : " + self.book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} : {}\n".format(self.book.val()['title'], self.book.val()['author']))
         
     def search_book(self):
         self.textBrowser_info.setText('')
@@ -413,7 +413,7 @@ class MenuUsuario(QtWidgets.QDialog):
         if (titulo in self.titulos):
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
+                    self.textBrowser_info.setText("Título: {}\nAutor: {}\nGênero: {}\nISBN: {}\nDescrição: {}\nAno: {}\nNúmero de páginas: {}\n".format(t.val()['title'], t.val()['author'], t.val()['genre'], t.val()['isbn'], t.val()['description'], t.val()['year'], t.val()['pages']))
         else:
             print("nao achei")
             self.list_books()
@@ -425,12 +425,13 @@ class AdmLivros(QtWidgets.QDialog):
         uic.loadUi('adm_livros.ui', self)
 
         self.mainWindow = mainWindow
-        self.list_books()
+
         self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
         self.pushButton_editar.clicked.connect(self.edit_book)
         self.pushButton_cancelar.clicked.connect(self.limpes)
        
+        self.list_books()
         
     def limpes(self):
         self.textBrowser_info.setText('')
@@ -439,12 +440,13 @@ class AdmLivros(QtWidgets.QDialog):
     def list_books(self):
         
         self.titulos = []
+        self.textBrowser_info.setText("")
 
         self.books = db.child('books').get()
         for book in self.books.each():
             print(book.val()['title'])
             self.titulos.append(book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + " : " + book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} (por {})\n".format(book.val()['title'], book.val()['author']))
         
     def search_book(self):
         self.pushButton_editar.setVisible(False)
@@ -454,7 +456,7 @@ class AdmLivros(QtWidgets.QDialog):
             self.pushButton_editar.setVisible(True)
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
+                    self.textBrowser_info.setText("Título: {}\nAutor: {}\nGênero: {}\nISBN: {}\nDescrição: {}\nAno: {}\nNúmero de páginas: {}\n".format(t.val()['title'], t.val()['author'], t.val()['genre'], t.val()['isbn'], t.val()['description'], t.val()['year'], t.val()['pages']))
                     self.livro = Book.from_dict(t.val())
         
         else:
@@ -475,29 +477,31 @@ class AdmUsuarios(QtWidgets.QDialog):
 
         self.pushButton_Editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_user)
-        self.list_users()
-
         self.pushButton_Editar.clicked.connect(self.edit_user)
+
+        self.list_users()
     
     def list_users(self):
         
         self.userslist = []
 
+        self.textBrowser_info.setText("")
+
         self.users = db.child('users').get()
         for self.user in self.users.each():
             print(self.user.val()['name'])
-            self.userslist.append(self.user.val()['name'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.user.val()['name'] + " : " + self.user.val()['cpf']+ "\n")
+            self.userslist.append(self.user.val()['email'].lower())
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} ({})\n".format(self.user.val()['email'], self.user.val()['name']))
         
     def search_user(self):
         self.pushButton_Editar.setVisible(False)
         self.textBrowser_info.setText('')
-        usuario = self.lineEdit_buscar.text().upper()
-        if (usuario in self.userslist):
+        usuario_email = self.lineEdit_buscar.text().lower()
+        if (usuario_email in self.userslist):
              self.pushButton_Editar.setVisible(True)
              for u in self.users.each():
-                 if (u.val()['name'].upper()==usuario):
-                     self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
+                 if (u.val()['email'].lower()==usuario_email):
+                     self.textBrowser_info.setText("Nome: {}\nCPF: {}\nEmail: {}\n".format(u.val()['name'], u.val()['cpf'], u.val()['email']))
                      self.user_to_edit = User.from_dict(u.val())
         else:
             print("nao achei")
