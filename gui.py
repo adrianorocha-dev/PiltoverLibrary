@@ -139,10 +139,46 @@ class CadastrarLivro(QtWidgets.QDialog):
         uic.loadUi('cadastrar_livro.ui', self)
 
         self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
-       
-    def save_to_firebase(self):
+    
+    def validate(self):
+        from re import match
 
+        titleVal = self.lineEdit_titulo.text() != ""
+        pagesVal = match("[0-9]+", self.lineEdit_ISBN.text()) != None
+        yearVal = match("[0-9]{4}", self.lineEdit_ano.text()) != None
+        genreVal = self.lineEdit_Genero.text() != ""
+        descVal = self.lineEdit_descricao.text() != ""
+        authorVal = self.lineEdit_autor.text() != ""
+
+        if not (titleVal and pagesVal and yearVal and genreVal and descVal and authorVal):
+            if not titleVal:
+                infoText = "Preencha o campo Título."
+            elif not pagesVal:
+                infoText = "O Número de páginas está em um formato inválido."
+            elif not yearVal:
+                infoText = "O campo Ano está em formato inválido."
+            elif not genreVal:
+                infoText = "Preencha o campo Gênero."
+            elif not descVal:
+                infoText = "Preencha o campo Descrição."
+            else: # not author
+                infoText = "Preencha o campo Autor."
             
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Erro")
+            msg.setInformativeText(infoText)
+            msg.setWindowTitle("Erro")
+            msg.exec_()
+
+            return False
+        else:
+            print('Validado')
+            return True
+
+    def save_to_firebase(self):
+        validation = self.validate()
+        if validation:
             titulo = self.lineEdit_titulo.text()
             numerodepaginas = self.lineEdit_numerodepaginas.text()
             isbn = self.lineEdit_ISBN.text()
@@ -151,47 +187,93 @@ class CadastrarLivro(QtWidgets.QDialog):
             descricao = self.lineEdit_descricao.text()
             autor = self.lineEdit_autor.text()
 
-            if not(titulo == '' or numerodepaginas == '' or isbn == '' or  genero == '' or descricao == '' or autor == ''):
+            book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
 
+            db.child('books').push(book.to_dict())
 
-            #Remove dots and dashes from CPF
-    
-                book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
-
-                db.child('books').push(book.to_dict())
-
-                msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
-                msg.setText("Sucesso")
-                msg.setInformativeText("Cadastrado com sucesso!")
-                msg.setWindowTitle("Sucesso")
-                msg.exec_()
-            else:
-                msg = QtWidgets.QMessageBox()
-                msg.setIcon(QtWidgets.QMessageBox.NoIcon)
-                msg.setText("Failure")
-                msg.setInformativeText("Todos os campos são obrigatorios")
-                msg.setWindowTitle("Failure")
-                msg.exec_()
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+            msg.setText("Sucesso")
+            msg.setInformativeText("Cadastrado com sucesso!")
+            msg.setWindowTitle("Sucesso")
+            msg.exec_()
+        else:
+            print("Validation Error")
     
    
         
 class EditarCadastro(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(EditarCadastro, self).__init__(parent)
         uic.loadUi('Editar_cadastro.ui', self)
-    
+
+        self.mainWindow = mainWindow
+
+        self.pushButton_alterar.clicked.connect(self.save_to_firebase)
+
     def setValues(self, user):
         self.lineEdit_Nome.setText(user.name)
         self.lineEdit_CPF.setText(user.cpf)
-        self.lineEdit_Email.setText(user.email)
+    
+    def validate(self):
+        import re
+        nameVal = self.lineEdit_nome.text() != ""
+        cpfVal = re.match("[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}", self.lineEdit_CPF.text()) != None
+        
+        print("Validando...")
 
+        if not (nameVal and cpfVal):
+            if not nameVal:
+                infoText = "Erro! Preencha o campo nome."
+            else: # not cpfVal
+                infoText = "Erro! CPF inválido."
+            
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Erro")
+            msg.setInformativeText(infoText)
+            msg.setWindowTitle("Erro")
+            msg.exec_()
 
+            return False
+        else:
+            print("validado")
+            return True
+    
+    def save_to_firebase(self):
+        validation = self.validate()
+        if validation:
+            name = self.lineEdit_Nome.text()
+            cpf = self.lineEdit_CPF.text()
+
+            #Remove dots and dashes from CPF
+            from re import sub as re_sub
+            cpf = re_sub('[.-]', '', cpf)
+
+            user_update = { 'name': name, 'cpf': cpf }
+
+            user = db.child('users').order_by_child("cpf").equal_to(cpf).get().each()
+            db.child('users').child(user[0].key()).update(user_update)
+
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
+            msg.setText("Sucesso")
+            msg.setInformativeText("Alterações salvas com sucesso!")
+            msg.setWindowTitle("Sucesso")
+            msg.exec_()
+
+            if self.mainWindow:
+                if loggedUser != None and loggedUser.level == LevelOfAccess.ADMIN:
+                    self.mainWindow.stackedWidget.setCurrentIndex(4)
+                else:
+                    self.mainWindow.stackedWidget.setCurrentIndex(0)
 
 class EditarLivro(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(EditarLivro, self).__init__(parent)
         uic.loadUi('atualizar_livro.ui', self)
+
+        self.mainWindow = mainWindow
 
         self.pushButton_confirmar.clicked.connect(self.setValuesInFirebase)
 
@@ -204,34 +286,73 @@ class EditarLivro(QtWidgets.QDialog):
         self.lineEdit_descricao.setText(livro.description)
         self.lineEdit_autor.setText(livro.author)
 
+    def validate(self):
+        from re import match
+
+        titleVal = self.lineEdit_titulo.text() != ""
+        pagesVal = match("[0-9]+", self.lineEdit_ISBN.text()) != None
+        yearVal = match("[0-9]{4}", self.lineEdit_ano.text()) != None
+        genreVal = self.lineEdit_Genero.text() != ""
+        descVal = self.lineEdit_descricao.text() != ""
+        authorVal = self.lineEdit_autor.text() != ""
+
+        if not (titleVal and pagesVal and yearVal and genreVal and descVal and authorVal):
+            if not titleVal:
+                infoText = "Preencha o campo Título."
+            elif not pagesVal:
+                infoText = "O Número de páginas está em um formato inválido."
+            elif not yearVal:
+                infoText = "O campo Ano está em formato inválido."
+            elif not genreVal:
+                infoText = "Preencha o campo Gênero."
+            elif not descVal:
+                infoText = "Preencha o campo Descrição."
+            else: # not author
+                infoText = "Preencha o campo Autor."
+            
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Erro")
+            msg.setInformativeText(infoText)
+            msg.setWindowTitle("Erro")
+            msg.exec_()
+
+            return False
+        else:
+            print('Validado')
+            return True
+
     def setValuesInFirebase (self):
-
-        titulo = self.lineEdit_titulo.text()
-        numerodepaginas = self.lineEdit_numerodepaginas.text()
-        isbn = self.lineEdit_ISBN.text()
-        ano = self.lineEdit_ano.text()
-        genero = self.lineEdit_Genero.text()
-        descricao = self.lineEdit_descricao.text()
-        autor = self.lineEdit_autor.text()
-
-        if not(titulo == '' or numerodepaginas == '' or isbn == '' or  genero == '' or descricao == '' or autor == ''):    
+        validation = self.validate()
+        if validation:
+            titulo = self.lineEdit_titulo.text()
+            numerodepaginas = self.lineEdit_numerodepaginas.text()
+            isbn = self.lineEdit_ISBN.text()
+            ano = self.lineEdit_ano.text()
+            genero = self.lineEdit_Genero.text()
+            descricao = self.lineEdit_descricao.text()
+            autor = self.lineEdit_autor.text()
     
-            book = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
-            db.child('books').push(book.to_dict())
+            book_update = Book(isbn, titulo, numerodepaginas, genero, descricao, ano, autor)
+
+            book = db.child('books').order_by_child("isbn").equal_to(book_update.isbn).get().each()
+
+            db.child('books').child(book[0].key()).update(book_update.to_dict())
 
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.NoIcon)
             msg.setText("Sucesso")
-            msg.setInformativeText("Cadastrado com sucesso!")
+            msg.setInformativeText("Alterações salvas com sucesso!")
             msg.setWindowTitle("Sucesso")
             msg.exec_()
+
+            if self.mainWindow:
+                if loggedUser != None and loggedUser.level == LevelOfAccess.ADMIN:
+                    self.mainWindow.stackedWidget.setCurrentIndex(4)
+                else:
+                    self.mainWindow.stackedWidget.setCurrentIndex(0)
         else:
-            msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.NoIcon)
-            msg.setText("Failure")
-            msg.setInformativeText("Todos os campos são obrigatorios")
-            msg.setWindowTitle("Failure")
-            msg.exec_()
+            print("Validation Error")
     
                
 
