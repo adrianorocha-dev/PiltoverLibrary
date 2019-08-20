@@ -95,7 +95,7 @@ border: None;
    <item>
     <widget class="QPushButton" name="pushButton_AdmLivros">
      <property name="text">
-      <string>Administrar livors</string>
+      <string>Administrar livros</string>
      </property>
      <property name="icon">
       <iconset>
