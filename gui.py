@@ -375,17 +375,20 @@ class MenuUsuario(QtWidgets.QDialog):
         uic.loadUi('menu_usuario.ui', self)
 
         self.pushButton_buscar.clicked.connect(self.search_book)
+        self.pushButton_listar.clicked.connect(self.list_books)
         self.list_books()
 
     def list_books(self):
         
         self.titulos = []
 
+        self.textBrowser_info.setText('')
+
         self.books = db.child('books').get()
         for self.book in self.books.each():
             print(self.book.val()['title'])
             self.titulos.append(self.book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + " : " + self.book.val()['author']+ "\n")
         
     def search_book(self):
         self.textBrowser_info.setText('')
@@ -405,12 +408,17 @@ class AdmLivros(QtWidgets.QDialog):
         uic.loadUi('adm_livros.ui', self)
 
         self.mainWindow = mainWindow
-
+        self.list_books()
         self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
         self.pushButton_editar.clicked.connect(self.edit_book)
+        self.pushButton_cancelar.clicked.connect(self.limpes)
+       
+        
+    def limpes(self):
+        self.textBrowser_info.setText('')
         self.list_books()
-
+        
     def list_books(self):
         
         self.titulos = []
@@ -419,7 +427,7 @@ class AdmLivros(QtWidgets.QDialog):
         for book in self.books.each():
             print(book.val()['title'])
             self.titulos.append(book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + ":" + book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + " : " + book.val()['author']+ "\n")
         
     def search_book(self):
         self.pushButton_editar.setVisible(False)
@@ -431,10 +439,11 @@ class AdmLivros(QtWidgets.QDialog):
                 if (t.val()['title'].upper()==titulo):
                     self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
                     self.livro = Book.from_dict(t.val())
+        
         else:
             print("nao achei")
             self.list_books()
-
+        
     def edit_book(self):
         self.mainWindow.stackedWidget.setCurrentIndex(7)
         self.mainWindow.stackedWidget.widget(7).setValues(self.livro)
