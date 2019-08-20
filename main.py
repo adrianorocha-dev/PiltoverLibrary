@@ -71,13 +71,14 @@ if __name__ == "__main__":
     AdmLivros.pushButton_cancelar.clicked.connect(window.goto_Adm)
 
     CadastrarLivro = CadastrarLivro()
-    
     CadastrarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
     CadastrarLivro.pushButton_cadastrar.clicked.connect(window.goto_Adm)
     
     EditarCadastro = EditarCadastro(mainWindow=window)
     EditarCadastro.pushButton_alterar.clicked.connect(window.goto_Adm)
     EditarCadastro.pushButton_Excluir.clicked.connect(window.goto_Adm)
+    EditarCadastro.pushButton_cancelar.clicked.connect(window.goto_adm_user)
+
 
     EditarLivro = EditarLivro(mainWindow=window)
     EditarLivro.pushButton_confirmar.clicked.connect(window.goto_Adm)

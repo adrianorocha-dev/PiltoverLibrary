@@ -221,7 +221,7 @@ class EditarCadastro(QtWidgets.QDialog):
     
     def validate(self):
         import re
-        nameVal = self.lineEdit_nome.text() != ""
+        nameVal = self.lineEdit_Nome.text() != ""
         cpfVal = re.match("[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}", self.lineEdit_CPF.text()) != None
         
         print("Validando...")
