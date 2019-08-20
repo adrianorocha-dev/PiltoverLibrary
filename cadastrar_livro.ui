@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>561</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@
     <widget class="QLineEdit" name="lineEdit_ano"/>
    </item>
    <item row="8" column="2">
-    <widget class="QLineEdit" name="lineEdit_ISBN"/>
+    <widget class="QLineEdit" name="lineEdit_numerodepaginas"/>
    </item>
    <item row="19" column="2">
     <widget class="QPushButton" name="pushButton_cancelar">
@@ -89,7 +89,7 @@
    <item row="7" column="2">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>ISBN</string>
+      <string>Nº de páginas</string>
      </property>
     </widget>
    </item>
@@ -115,7 +115,7 @@
    <item row="5" column="2">
     <widget class="QLabel" name="label_editora">
      <property name="text">
-      <string>Nº de páginas</string>
+      <string>ISBN</string>
      </property>
     </widget>
    </item>
@@ -183,7 +183,7 @@ border: None;
     </widget>
    </item>
    <item row="6" column="2">
-    <widget class="QLineEdit" name="lineEdit_numerodepaginas"/>
+    <widget class="QLineEdit" name="lineEdit_ISBN"/>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label">

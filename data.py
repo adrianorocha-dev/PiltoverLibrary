@@ -1,8 +1,8 @@
 class Book:
-    def __init__(self, isbn, title, pages, genre, description, year, author = []):
+    def __init__(self, isbn, title, pages, genre, description, year, author):
         self.isbn = isbn
         self.title = title
-        self.publisher = publisher
+        self.pages = pages
         self.genre = genre
         self.description = description
         self.year = year

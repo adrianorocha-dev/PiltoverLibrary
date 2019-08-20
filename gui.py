@@ -144,15 +144,18 @@ class CadastrarLivro(QtWidgets.QDialog):
         from re import match
 
         titleVal = self.lineEdit_titulo.text() != ""
-        pagesVal = match("[0-9]+", self.lineEdit_ISBN.text()) != None
+        isbnVal = match("[0-9]{10} | [0-9]{13}", self.lineEdit_ISBN.text()) != None
+        pagesVal = match("[0-9]+", self.lineEdit_numerodepaginas.text()) != None
         yearVal = match("[0-9]{4}", self.lineEdit_ano.text()) != None
         genreVal = self.lineEdit_Genero.text() != ""
         descVal = self.lineEdit_descricao.text() != ""
         authorVal = self.lineEdit_autor.text() != ""
 
-        if not (titleVal and pagesVal and yearVal and genreVal and descVal and authorVal):
+        if not (titleVal and isbnVal and pagesVal and yearVal and genreVal and descVal and authorVal):
             if not titleVal:
                 infoText = "Preencha o campo Título."
+            elif not isbnVal:
+                infoText = "O ISBN está em um formato inválido."
             elif not pagesVal:
                 infoText = "O Número de páginas está em um formato inválido."
             elif not yearVal:
@@ -180,8 +183,8 @@ class CadastrarLivro(QtWidgets.QDialog):
         validation = self.validate()
         if validation:
             titulo = self.lineEdit_titulo.text()
-            numerodepaginas = self.lineEdit_numerodepaginas.text()
             isbn = self.lineEdit_ISBN.text()
+            numerodepaginas = self.lineEdit_numerodepaginas.text()
             ano = self.lineEdit_ano.text()
             genero = self.lineEdit_Genero.text()
             descricao = self.lineEdit_descricao.text()
