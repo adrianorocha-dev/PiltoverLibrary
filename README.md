@@ -16,4 +16,11 @@ Para conseguir executar o programa é necessário navegar no terminal até a pas
 ```bash
 pip install PyQt5 pyrebase4 requests
 ```
-O pyqt5 é a biblioteca responsável pela interface do sistema e pode ser instalado com o seguinte comando: pip install pyqt5. O pyrebase é a biblioteca que permite a conexão do sistema com o firebase, para instalar execute o comando: pip install pyrebase. Por fim, para abrir o programa, basta executar o arquivo main.py, que está na pasta do projeto, da seguinte forma: Python main.py 
+O pyqt5 é a biblioteca responsável pela interface do sistema e pode ser instalado com o seguinte comando: pip install pyqt5. O pyrebase é a biblioteca que permite a conexão do sistema com o firebase, para instalar execute o comando: pip install pyrebase. Por fim, para abrir o programa, basta executar o arquivo main.py, que está na pasta do projeto, com o comando:
+```bash
+python main.py
+```
+Obs.: Certifique-se de utilizar o executável do Python 3. Caso o padrão do python no seu sistema seja o Python 2, especifique a versão correta com o comando:
+```bash
+python3 main.py
+```
