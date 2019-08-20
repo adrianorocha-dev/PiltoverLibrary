@@ -194,6 +194,18 @@ border: None;
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_titulo</tabstop>
+  <tabstop>lineEdit_numerodepaginas</tabstop>
+  <tabstop>lineEdit_ano</tabstop>
+  <tabstop>lineEdit_Genero</tabstop>
+  <tabstop>lineEdit_descricao</tabstop>
+  <tabstop>lineEdit_autor</tabstop>
+  <tabstop>pushButton_confirmar</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
+  <tabstop>pushButton_Excluir</tabstop>
+  <tabstop>pushButton_3</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
