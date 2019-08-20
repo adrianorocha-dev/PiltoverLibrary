@@ -369,17 +369,20 @@ class MenuUsuario(QtWidgets.QDialog):
         uic.loadUi('menu_usuario.ui', self)
 
         self.pushButton_buscar.clicked.connect(self.search_book)
+        self.pushButton_listar.clicked.connect(self.list_books)
         self.list_books()
 
     def list_books(self):
         
         self.titulos = []
 
+        self.textBrowser_info.setText('')
+
         self.books = db.child('books').get()
         for self.book in self.books.each():
             print(self.book.val()['title'])
             self.titulos.append(self.book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + ":" + self.book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + " : " + self.book.val()['author']+ "\n")
         
     def search_book(self):
         self.textBrowser_info.setText('')
@@ -418,7 +421,7 @@ class AdmLivros(QtWidgets.QDialog):
         for book in self.books.each():
             print(book.val()['title'])
             self.titulos.append(book.val()['title'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + ":" + book.val()['author']+ "\n")
+            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + " : " + book.val()['author']+ "\n")
         
     def search_book(self):
         self.pushButton_editar.setVisible(False)
