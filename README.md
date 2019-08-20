@@ -14,6 +14,6 @@ principal, administrar livros e administrar usuários. O menu principal traz dua
 
 Para conseguir executar o programa é necessário navegar no terminal até a pasta onde o projeto foi clonado. Lá devem ser instalados os seguintes pacotes, pyqt5, pyrebase4 e requests.
 ```bash
-pip install PyQt5 pyrebase requests
+pip install PyQt5 pyrebase4 requests
 ```
 O pyqt5 é a biblioteca responsável pela interface do sistema e pode ser instalado com o seguinte comando: pip install pyqt5. O pyrebase é a biblioteca que permite a conexão do sistema com o firebase, para instalar execute o comando: pip install pyrebase. Por fim, para abrir o programa, basta executar o arquivo main.py, que está na pasta do projeto, da seguinte forma: Python main.py 
