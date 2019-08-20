@@ -276,6 +276,12 @@ class EditarLivro(QtWidgets.QDialog):
         self.mainWindow = mainWindow
 
         self.pushButton_confirmar.clicked.connect(self.setValuesInFirebase)
+        self.pushButton_Excluir.clicked.connect(self.deletelivro)
+
+    def deletelivro(self):
+        book = db.child('books').order_by_child("isbn").equal_to(self.lineEdit_ISBN.text()).get().each()
+        db.child('books').child(book[0].key()).remove()
+
 
     def setValues(self, livro):
         self.lineEdit_titulo.setText(livro.title)
