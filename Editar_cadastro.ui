@@ -14,121 +14,11 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="12" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0" rowspan="2">
-    <widget class="QPushButton" name="pushButton_Logo">
-     <property name="styleSheet">
-      <string notr="true">QPushButton{
-border: None;
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
-       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>128</width>
-       <height>128</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <widget class="QLabel" name="label_titulo">
-     <property name="text">
-      <string>Nome</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1" colspan="3">
-    <widget class="QLabel" name="label_editora">
-     <property name="text">
-      <string>CPF</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="3">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Email</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1" colspan="3">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Senha</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="2">
-    <widget class="QPushButton" name="pushButton_cancelar">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Cancelar</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
-       <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="5" column="1" colspan="2">
     <widget class="QLineEdit" name="lineEdit_CPF"/>
    </item>
-   <item row="9" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_Senha"/>
-   </item>
    <item row="3" column="1" colspan="2">
     <widget class="QLineEdit" name="lineEdit_Nome"/>
-   </item>
-   <item row="7" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_Email"/>
    </item>
    <item row="5" column="3">
     <spacer name="horizontalSpacer_2">
@@ -146,7 +36,7 @@ border: None;
      </property>
     </spacer>
    </item>
-   <item row="11" column="1">
+   <item row="9" column="1">
     <widget class="QPushButton" name="pushButton_Excluir">
      <property name="text">
       <string>Excluir</string>
@@ -158,7 +48,25 @@ border: None;
      </property>
     </widget>
    </item>
-   <item row="10" column="1" colspan="2">
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Editar Cadastro</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="2">
     <widget class="QPushButton" name="pushButton_alterar">
      <property name="text">
       <string>Confirmar</string>
@@ -186,26 +94,122 @@ border: None;
      </property>
     </spacer>
    </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-       <pointsize>24</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+   <item row="5" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="9" column="2">
+    <widget class="QPushButton" name="pushButton_cancelar">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
      <property name="text">
-      <string>Editar Cadastro</string>
+      <string>Cancelar</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/cancel.png</normaloff>
+       <normalon>Icon/cancel.png</normalon>PiltoverLibrary/Icon/cancel.png</iconset>
      </property>
     </widget>
    </item>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QPushButton" name="pushButton_Logo">
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+border: None;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/logo.png</normaloff>
+       <normalon>Icon/logo.png</normalon>PiltoverLibrary/Icon/logo.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>128</width>
+       <height>128</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QLabel" name="label_editora">
+     <property name="text">
+      <string>CPF</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QLabel" name="label_titulo">
+     <property name="text">
+      <string>Nome</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_Nome</tabstop>
+  <tabstop>lineEdit_CPF</tabstop>
+  <tabstop>pushButton_alterar</tabstop>
+  <tabstop>pushButton_Excluir</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
+  <tabstop>pushButton_Logo</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

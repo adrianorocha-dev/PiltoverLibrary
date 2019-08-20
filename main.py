@@ -62,8 +62,7 @@ if __name__ == "__main__":
 
     menuUsuario = MenuUsuario()
     
-    adm_usuario = AdmUsuarios()
-    adm_usuario.pushButton_Editar.clicked.connect(window.goto_edt_cadastro)
+    adm_usuario = AdmUsuarios(mainWindow=window)
     adm_usuario.pushButton_adicionar.clicked.connect(window.goto_CadastrarUsuario)
     adm_usuario.pushButton_cancelar.clicked.connect(window.goto_Adm)
 
@@ -76,13 +75,11 @@ if __name__ == "__main__":
     CadastrarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
     CadastrarLivro.pushButton_cadastrar.clicked.connect(window.goto_Adm)
     
-    EditarCadastro = EditarCadastro()
-    EditarCadastro.pushButton_cancelar.clicked.connect(window.goto_adm_user)
+    EditarCadastro = EditarCadastro(mainWindow=window)
     EditarCadastro.pushButton_alterar.clicked.connect(window.goto_Adm)
     EditarCadastro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
-    EditarLivro = EditarLivro()
-    EditarLivro.pushButton_cancelar.clicked.connect(window.goto_adm_livros)
+    EditarLivro = EditarLivro(mainWindow=window)
     EditarLivro.pushButton_confirmar.clicked.connect(window.goto_Adm)
     EditarLivro.pushButton_Excluir.clicked.connect(window.goto_Adm)
 
