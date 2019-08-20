@@ -209,9 +209,13 @@ class EditarCadastro(QtWidgets.QDialog):
 
         self.mainWindow = mainWindow
 
+        self.editing_user = None
+
         self.pushButton_alterar.clicked.connect(self.save_to_firebase)
+        self.pushButton_Excluir.clicked.connect(self.delete)
 
     def setValues(self, user):
+        self.editing_user = user
         self.lineEdit_Nome.setText(user.name)
         self.lineEdit_CPF.setText(user.cpf)
     
@@ -252,7 +256,7 @@ class EditarCadastro(QtWidgets.QDialog):
 
             user_update = { 'name': name, 'cpf': cpf }
 
-            user = db.child('users').order_by_child("cpf").equal_to(cpf).get().each()
+            user = db.child('users').order_by_child("email").equal_to(self.editing_user.email).get().each()
             db.child('users').child(user[0].key()).update(user_update)
 
             msg = QtWidgets.QMessageBox()
@@ -267,6 +271,15 @@ class EditarCadastro(QtWidgets.QDialog):
                     self.mainWindow.stackedWidget.setCurrentIndex(4)
                 else:
                     self.mainWindow.stackedWidget.setCurrentIndex(0)
+            
+    def delete(self):
+        from firebase import admin_auth
+
+        user = db.child('users').order_by_child('email').equal_to(self.editing_user.email).get().each()
+        db.child('users').child(user[0].key()).remove()
+        
+        auth_user = admin_auth.get_user_by_email(self.editing_user.email)
+        admin_auth.delete_user(auth_user.uid)
 
 class EditarLivro(QtWidgets.QDialog):
     def __init__(self, parent=None, mainWindow=None):
