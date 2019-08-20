@@ -298,8 +298,7 @@ class EditarLivro(QtWidgets.QDialog):
 
     def setValues(self, livro):
         self.lineEdit_titulo.setText(livro.title)
-        self.lineEdit_numerodepaginas.setText(livro.publisher)
-        self.lineEdit_ISBN.setText(livro.isbn)
+        self.lineEdit_numerodepaginas.setText(livro.pages)
         self.lineEdit_ano.setText(livro.year)
         self.lineEdit_Genero.setText(livro.genre)
         self.lineEdit_descricao.setText(livro.description)
@@ -309,7 +308,7 @@ class EditarLivro(QtWidgets.QDialog):
         from re import match
 
         titleVal = self.lineEdit_titulo.text() != ""
-        pagesVal = match("[0-9]+", self.lineEdit_ISBN.text()) != None
+        pagesVal = match("[0-9]+", self.lineEdit_numerodepaginas.text()) != None
         yearVal = match("[0-9]{4}", self.lineEdit_ano.text()) != None
         genreVal = self.lineEdit_Genero.text() != ""
         descVal = self.lineEdit_descricao.text() != ""
@@ -409,7 +408,7 @@ class MenuUsuario(QtWidgets.QDialog):
         if (titulo in self.titulos):
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
         else:
             print("nao achei")
             self.list_books()
@@ -450,7 +449,7 @@ class AdmLivros(QtWidgets.QDialog):
             self.pushButton_editar.setVisible(True)
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['publisher'])
+                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
                     self.livro = Book.from_dict(t.val())
         
         else:

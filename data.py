@@ -1,5 +1,5 @@
 class Book:
-    def __init__(self, isbn, title, publisher, genre, description, year, author = []):
+    def __init__(self, isbn, title, pages, genre, description, year, author = []):
         self.isbn = isbn
         self.title = title
         self.publisher = publisher
@@ -10,7 +10,7 @@ class Book:
     
     @staticmethod
     def from_dict(source):
-        book = Book(source['isbn'], source['title'], source['publisher'], source['genre'], source['description'], source['year'], source['author'])
+        book = Book(source['isbn'], source['title'], source['pages'], source['genre'], source['description'], source['year'], source['author'])
 
         return book
     
@@ -18,7 +18,7 @@ class Book:
         return {
             'isbn': self.isbn,
             'title': self.title,
-            'publisher': self.publisher,
+            'pages': self.pages,
             'genre': self.genre,
             'description': self.description,
             'year': self.year,
