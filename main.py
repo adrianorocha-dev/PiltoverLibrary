@@ -72,7 +72,6 @@ if __name__ == "__main__":
 
     CadastrarLivro = CadastrarLivro()
     CadastrarLivro.pushButton_cancelar.clicked.connect(window.goto_Adm)
-    CadastrarLivro.pushButton_cadastrar.clicked.connect(window.goto_Adm)
     
     EditarCadastro = EditarCadastro(mainWindow=window)
     EditarCadastro.pushButton_alterar.clicked.connect(window.goto_Adm)
