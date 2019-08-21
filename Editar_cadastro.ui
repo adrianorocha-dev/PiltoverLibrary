@@ -7,15 +7,40 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>550</height>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="14" column="1">
-    <spacer name="verticalSpacer_3">
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Editar Cadastro</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QLabel" name="label_editora">
+     <property name="text">
+      <string>CPF</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
@@ -30,8 +55,17 @@
      </property>
     </spacer>
    </item>
-   <item row="5" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_CPF"/>
+   <item row="11" column="1">
+    <widget class="QPushButton" name="pushButton_Excluir">
+     <property name="text">
+      <string>Excluir</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>PiltoverLibrary/Icon/garbage.png</normaloff>
+       <normalon>Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
+     </property>
+    </widget>
    </item>
    <item row="11" column="2">
     <widget class="QPushButton" name="pushButton_cancelar">
@@ -54,6 +88,20 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QLabel" name="label_titulo">
+     <property name="text">
+      <string>Nome</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Nível  de acesso</string>
+     </property>
+    </widget>
+   </item>
    <item row="9" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -70,44 +118,6 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <widget class="QLabel" name="label_titulo">
-     <property name="text">
-      <string>Nome</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1">
-    <widget class="QPushButton" name="pushButton_Excluir">
-     <property name="text">
-      <string>Excluir</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>PiltoverLibrary/Icon/garbage.png</normaloff>
-       <normalon>Icon/garbage.png</normalon>PiltoverLibrary/Icon/garbage.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QLineEdit" name="lineEdit_Nome"/>
-   </item>
    <item row="10" column="1" colspan="2">
     <widget class="QPushButton" name="pushButton_alterar">
      <property name="text">
@@ -120,19 +130,8 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1" colspan="3">
-    <widget class="QLabel" name="label_editora">
-     <property name="text">
-      <string>CPF</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QRadioButton" name="radioButton_admin">
-     <property name="text">
-      <string>Administrador</string>
-     </property>
-    </widget>
+   <item row="3" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_Nome"/>
    </item>
    <item row="5" column="3">
     <spacer name="horizontalSpacer_2">
@@ -166,31 +165,6 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <family>DejaVu Sans</family>
-       <pointsize>24</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Editar Cadastro</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QRadioButton" name="radioButton_common">
-     <property name="text">
-      <string>Usuário comum</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="0" rowspan="2">
     <widget class="QPushButton" name="pushButton_Logo">
      <property name="styleSheet">
@@ -214,10 +188,36 @@ border: None;
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
-    <widget class="QLabel" name="label_2">
+   <item row="14" column="1">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Minimum</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="7" column="1">
+    <widget class="QRadioButton" name="radioButton_common">
      <property name="text">
-      <string>Nível  de acesso</string>
+      <string>Usuário comum</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_CPF"/>
+   </item>
+   <item row="8" column="1">
+    <widget class="QRadioButton" name="radioButton_admin">
+     <property name="text">
+      <string>Administrador</string>
      </property>
     </widget>
    </item>

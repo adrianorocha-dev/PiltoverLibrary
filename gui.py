@@ -221,6 +221,9 @@ class EditarCadastro(QtWidgets.QDialog):
         self.editing_user = user
         self.lineEdit_Nome.setText(user.name)
         self.lineEdit_CPF.setText(user.cpf)
+        self.radioButton_common.setChecked(False)
+        self.radioButton_common.setChecked(False)
+
     
     def validate(self):
         import re
