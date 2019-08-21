@@ -185,7 +185,7 @@
     </widget>
    </item>
    <item row="7" column="1">
-    <widget class="QRadioButton" name="radioButton_common">
+    <widget class="QRadioButton" name="radioButton_comum">
      <property name="text">
       <string>Usuário comum</string>
      </property>

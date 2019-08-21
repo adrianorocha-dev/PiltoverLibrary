@@ -83,7 +83,7 @@ if __name__ == "__main__":
     EditarLivro = EditarLivro(mainWindow=window)
     EditarLivro.pushButton_confirmar.clicked.connect(window.goto_Adm)
     EditarLivro.pushButton_Excluir.clicked.connect(window.goto_Adm)
-
+    EditarLivro.pushButton_cancelar.clicked.connect(window.goto_adm_livros)
 
 
     window.stackedWidget.insertWidget(0, login)
