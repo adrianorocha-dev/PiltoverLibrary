@@ -134,9 +134,11 @@ class CadastrarUsuario(QtWidgets.QDialog):
 
 
 class CadastrarLivro(QtWidgets.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mainWindow=None):
         super(CadastrarLivro, self).__init__(parent)
         uic.loadUi('cadastrar_livro.ui', self)
+
+        self.mainWindow = mainWindow
 
         self.pushButton_cadastrar.clicked.connect(self.save_to_firebase)
     
@@ -209,6 +211,11 @@ class CadastrarLivro(QtWidgets.QDialog):
             self.lineEdit_descricao.setText('')
             self.lineEdit_autor.setText('')
 
+            if self.mainWindow:
+                if loggedUser != None and loggedUser.level == LevelOfAccess.ADMIN:
+                    self.mainWindow.stackedWidget.setCurrentIndex(4)
+                else:
+                    self.mainWindow.stackedWidget.setCurrentIndex(0)
         else:
             print("Validation Error")
     
@@ -230,22 +237,25 @@ class EditarCadastro(QtWidgets.QDialog):
         self.editing_user = user
         self.lineEdit_Nome.setText(user.name)
         self.lineEdit_CPF.setText(user.cpf)
-        self.radioButton_common.setChecked(False)
-        self.radioButton_common.setChecked(False)
+        self.radioButton_common.setChecked(user.level == LevelOfAccess.COMMON_USER)
+        self.radioButton_admin.setChecked(user.level == LevelOfAccess.ADMIN)
 
     
     def validate(self):
         import re
         nameVal = self.lineEdit_Nome.text() != ""
-        cpfVal = re.match("[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}", self.lineEdit_CPF.text()) != None
+        cpfVal = re.match("[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}", self.lineEdit_CPF.text()) != None
+        levelVal = self.radioButton_common.isChecked() or self.radioButton_admin.isChecked()
         
         print("Validando...")
 
-        if not (nameVal and cpfVal):
+        if not (nameVal and cpfVal and levelVal):
             if not nameVal:
                 infoText = "Erro! Preencha o campo nome."
-            else: # not cpfVal
+            elif not cpfVal:
                 infoText = "Erro! CPF inválido."
+            else: # not levelVal
+                infoText = "Erro! Defina o nível de acesso do usuário."
             
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -264,12 +274,13 @@ class EditarCadastro(QtWidgets.QDialog):
         if validation:
             name = self.lineEdit_Nome.text()
             cpf = self.lineEdit_CPF.text()
+            level = 1 if self.radioButton_admin.isChecked() else 0
 
             #Remove dots and dashes from CPF
             from re import sub as re_sub
             cpf = re_sub('[.-]', '', cpf)
 
-            user_update = { 'name': name, 'cpf': cpf }
+            user_update = { 'name': name, 'cpf': cpf, 'level': level }
 
             user = db.child('users').order_by_child("email").equal_to(self.editing_user.email).get().each()
             db.child('users').child(user[0].key()).update(user_update)
@@ -418,7 +429,7 @@ class MenuUsuario(QtWidgets.QDialog):
             for self.book in self.books:
                 print(self.book.val()['title'])
                 self.titulos.append(self.book.val()['title'].upper())
-                self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.book.val()['title'] + " : " + self.book.val()['author']+ "\n")
+                self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} : {}\n".format(self.book.val()['title'], self.book.val()['author']))
         
     def search_book(self):
         self.textBrowser_info.setText('')
@@ -426,7 +437,7 @@ class MenuUsuario(QtWidgets.QDialog):
         if (titulo in self.titulos):
             for t in self.books.each():
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
+                    self.textBrowser_info.setText("Título: {}\nAutor: {}\nGênero: {}\nISBN: {}\nDescrição: {}\nAno: {}\nNúmero de páginas: {}\n".format(t.val()['title'], t.val()['author'], t.val()['genre'], t.val()['isbn'], t.val()['description'], t.val()['year'], t.val()['pages']))
         else:
             print("nao achei")
             self.list_books()
@@ -438,12 +449,13 @@ class AdmLivros(QtWidgets.QDialog):
         uic.loadUi('adm_livros.ui', self)
 
         self.mainWindow = mainWindow
-        self.list_books()
+
         self.pushButton_editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_book)
         self.pushButton_editar.clicked.connect(self.edit_book)
         self.pushButton_cancelar.clicked.connect(self.limpes)
        
+        self.list_books()
         
     def limpes(self):
         self.textBrowser_info.setText('')
@@ -452,13 +464,14 @@ class AdmLivros(QtWidgets.QDialog):
     def list_books(self):
         
         self.titulos = []
+        self.textBrowser_info.setText("")
 
         self.books = db.child('books').get().each()
         if self.books:
             for book in self.books:
                 print(book.val()['title'])
                 self.titulos.append(book.val()['title'].upper())
-                self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ book.val()['title'] + " : " + book.val()['author']+ "\n")
+                self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} (por {})\n".format(book.val()['title'], book.val()['author']))
         
     def search_book(self):
         self.pushButton_editar.setVisible(False)
@@ -468,7 +481,7 @@ class AdmLivros(QtWidgets.QDialog):
             self.pushButton_editar.setVisible(True)
             for t in self.books:
                 if (t.val()['title'].upper()==titulo):
-                    self.textBrowser_info.setText("Título: " + t.val()['title'] + "\n Autor: " + t.val()['author'] + "\n Gênero: " + t.val()['genre'] + "\n ISBN: " + t.val()['isbn'] + "\n Descrição: " + t.val()['description'] + "\n Ano: "+ t.val()['year'] + "\n Nº de páginas: " + t.val()['pages'])
+                    self.textBrowser_info.setText("Título: {}\nAutor: {}\nGênero: {}\nISBN: {}\nDescrição: {}\nAno: {}\nNúmero de páginas: {}\n".format(t.val()['title'], t.val()['author'], t.val()['genre'], t.val()['isbn'], t.val()['description'], t.val()['year'], t.val()['pages']))
                     self.livro = Book.from_dict(t.val())
         
         else:
@@ -489,29 +502,31 @@ class AdmUsuarios(QtWidgets.QDialog):
 
         self.pushButton_Editar.setVisible(False)
         self.pushButton_buscar.clicked.connect(self.search_user)
-        self.list_users()
-
         self.pushButton_Editar.clicked.connect(self.edit_user)
+        
+        self.list_users()
     
     def list_users(self):
         
         self.userslist = []
+        self.textBrowser_info.setText("")
 
-        self.users = db.child('users').get()
-        for self.user in self.users.each():
-            print(self.user.val()['name'])
-            self.userslist.append(self.user.val()['name'].upper())
-            self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ self.user.val()['name'] + " : " + self.user.val()['cpf']+ "\n")
+        self.users = db.child('users').get().each()
+        if self.users:
+            for self.user in self.users:
+                print(self.user.val()['name'])
+                self.userslist.append(self.user.val()['email'].lower())
+                self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} ({})\n".format(self.user.val()['email'], self.user.val()['name']))
         
     def search_user(self):
         self.pushButton_Editar.setVisible(False)
         self.textBrowser_info.setText('')
-        usuario = self.lineEdit_buscar.text().upper()
-        if (usuario in self.userslist):
+        usuario_email = self.lineEdit_buscar.text().lower()
+        if (usuario_email in self.userslist):
              self.pushButton_Editar.setVisible(True)
-             for u in self.users.each():
-                 if (u.val()['name'].upper()==usuario):
-                     self.textBrowser_info.setText("Nome: " + u.val()['name'] + "\n CPF: " + u.val()['cpf'] + "\n Email: " + u.val()['email'] )
+             for u in self.users:
+                 if (u.val()['email'].lower()==usuario_email):
+                     self.textBrowser_info.setText("Nome: {}\nCPF: {}\nEmail: {}\n".format(u.val()['name'], u.val()['cpf'], u.val()['email']))
                      self.user_to_edit = User.from_dict(u.val())
         else:
             print("nao achei")
