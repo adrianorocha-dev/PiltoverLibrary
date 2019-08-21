@@ -165,6 +165,31 @@
      </property>
     </spacer>
    </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Editar Cadastro</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QRadioButton" name="radioButton_comum">
+     <property name="text">
+      <string>Usuário comum</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0" rowspan="2">
     <widget class="QPushButton" name="pushButton_Logo">
      <property name="styleSheet">
