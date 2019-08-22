@@ -25,6 +25,8 @@ class LoginUI(QtWidgets.QDialog):
         global firebase_user
         global loggedUser
 
+        firebase_user, loggedUser = None, None
+
         try:
             firebase_user = auth.sign_in_with_email_and_password(email, password)
         except requests.exceptions.HTTPError as e:
@@ -427,7 +429,7 @@ class MenuUsuario(QtWidgets.QDialog):
         self.books = db.child('books').get().each()
         if self.books:
             for self.book in self.books:
-                print(self.book.val()['title'])
+                #print(self.book.val()['title'])
                 self.titulos.append(self.book.val()['title'].upper())
                 self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} : {}\n".format(self.book.val()['title'], self.book.val()['author']))
         
@@ -469,7 +471,7 @@ class AdmLivros(QtWidgets.QDialog):
         self.books = db.child('books').get().each()
         if self.books:
             for book in self.books:
-                print(book.val()['title'])
+                #print(book.val()['title'])
                 self.titulos.append(book.val()['title'].upper())
                 self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} (por {})\n".format(book.val()['title'], book.val()['author']))
         
@@ -514,7 +516,7 @@ class AdmUsuarios(QtWidgets.QDialog):
         self.users = db.child('users').get().each()
         if self.users:
             for self.user in self.users:
-                print(self.user.val()['name'])
+                #print(self.user.val()['name'])
                 self.userslist.append(self.user.val()['email'].lower())
                 self.textBrowser_info.setText(self.textBrowser_info.toPlainText()+ "{} ({})\n".format(self.user.val()['email'], self.user.val()['name']))
         
