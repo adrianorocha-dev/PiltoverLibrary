@@ -322,7 +322,7 @@ class EditarLivro(QtWidgets.QDialog):
         self.pushButton_Excluir.clicked.connect(self.deletelivro)
 
     def deletelivro(self):
-        book = db.child('books').order_by_child("isbn").equal_to(self.lineEdit_ISBN.text()).get().each()
+        book = db.child('books').order_by_child("isbn").equal_to(self.editing_book.isbn).get().each()
         db.child('books').child(book[0].key()).remove()
 
 
@@ -437,7 +437,7 @@ class MenuUsuario(QtWidgets.QDialog):
         self.textBrowser_info.setText('')
         titulo = self.lineEdit_buscar.text().upper()
         if (titulo in self.titulos):
-            for t in self.books.each():
+            for t in self.books:
                 if (t.val()['title'].upper()==titulo):
                     self.textBrowser_info.setText("Título: {}\nAutor: {}\nGênero: {}\nISBN: {}\nDescrição: {}\nAno: {}\nNúmero de páginas: {}\n".format(t.val()['title'], t.val()['author'], t.val()['genre'], t.val()['isbn'], t.val()['description'], t.val()['year'], t.val()['pages']))
         else:
